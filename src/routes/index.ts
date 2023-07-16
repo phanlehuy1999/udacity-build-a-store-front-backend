@@ -28,7 +28,7 @@ import {
 
 export function initUserRoutes(app: Application) {
   app.get("/api/users", verifyAuthToken, getAllUser);
-  app.post("/api/users/create", verifyAuthToken, createUser);
+  app.post("/api/users/create", createUser);
   app.get("/api/users/:id", verifyAuthToken, getUserDetail);
   app.put("/api/users/:id", verifyAuthToken, updateUser);
   app.delete("/api/users/:id", verifyAuthToken, deleteUser);

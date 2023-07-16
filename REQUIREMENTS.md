@@ -67,5 +67,16 @@ Table: User (id:serial[primary key], username: varchar (100)[not null], firstnam
 - status of order (active or complete)
 
 ```
-Table: Orders (id:serial[primary key], product_id:integer(foreign key to products table), quantity:integer[not null], user_id:integer(foreign key to users table), status:boolean[not null])
+Table: Orders (id:serial[primary key], user_id:integer(foreign key to users table), status:boolean[not null])
+```
+
+#### Table: order_products
+
+- order_id
+- product_id
+- quantity
+
+```
+Table: Order Product (order_id:integer(foreign key to orders table), product_id:integer(foreign key to products table)
+, quantity:integer[not null])
 ```

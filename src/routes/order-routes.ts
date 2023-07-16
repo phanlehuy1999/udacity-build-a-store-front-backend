@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Order, OrderMapping } from "../models/order";
+import { OrderProduct, Order, OrderMapping } from "../models/order";
 
 const orderMapping = new OrderMapping();
 
@@ -15,19 +15,17 @@ export const getAllOrder = async (req: Request, res: Response) => {
 export const createOrder = async (req: Request, res: Response) => {
   try {
     const newOrder = {
-      product_id: req.body.product_id as unknown as number,
-      quantity: req.body.quantity as unknown as number,
-      user_id: req.body.user_id as unknown as number,
+      order_products: req.body.order_products as unknown as OrderProduct[],
       status: req.body.status as unknown as boolean,
+      user_id: req.body.user_id as unknown as number,
     } as Order;
     if (
-      !newOrder.product_id ||
-      !newOrder.quantity ||
-      !newOrder.user_id ||
-      newOrder.status === undefined
+      !newOrder.order_products ||
+      newOrder.status === undefined ||
+      !newOrder.user_id
     ) {
       res.status(400);
-      res.send("Missing param product_id or quantity or user_id or status");
+      res.send("Missing param order_products or status or user_id");
       return false;
     }
     const order: Order = await orderMapping.create(newOrder);
@@ -56,11 +54,16 @@ export const updateOrder = async (req: Request, res: Response) => {
   try {
     const updateOrder = {
       id: req.params.id as unknown as number,
+      user_id: req.body.user_id as unknown as number,
       status: req.body.status as unknown as boolean,
     };
-    if (!updateOrder.id || updateOrder.status === undefined) {
+    if (
+      !updateOrder.id ||
+      !updateOrder.user_id ||
+      updateOrder.status === undefined
+    ) {
       res.status(400);
-      res.send("Missing param id or status!");
+      res.send("Missing param id or user_id or status!");
       return false;
     }
     const order: Order = await orderMapping.edit(updateOrder);
