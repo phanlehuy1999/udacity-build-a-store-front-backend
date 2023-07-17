@@ -1,3 +1,4 @@
+// @ts-ignore
 import Client from "../database";
 
 export interface Product {
@@ -9,6 +10,7 @@ export interface Product {
 export class ProductMapping {
   async index(): Promise<Product[]> {
     try {
+      // @ts-ignore
       const conn = await Client.connect();
       const sql = "SELECT * FROM products";
       const { rows } = await conn.query(sql);
@@ -22,6 +24,7 @@ export class ProductMapping {
   async show(id: number): Promise<Product> {
     try {
       const sql = "SELECT * FROM products WHERE id=($1)";
+      // @ts-ignore
       const conn = await Client.connect();
       const { rows } = await conn.query(sql, [id]);
       conn.release();
@@ -35,6 +38,7 @@ export class ProductMapping {
     try {
       const sql =
         "INSERT INTO products (name, price) VALUES($1, $2) RETURNING *";
+      // @ts-ignore
       const conn = await Client.connect();
       const { rows } = await conn.query(sql, [product.name, product.price]);
       conn.release();
@@ -49,6 +53,7 @@ export class ProductMapping {
     try {
       const sql =
         "UPDATE products SET name = $1, price = $2 WHERE id = $3 RETURNING *";
+      // @ts-ignore
       const conn = await Client.connect();
       const { rows } = await conn.query(sql, [name, price, id]);
       conn.release();
@@ -61,6 +66,7 @@ export class ProductMapping {
   async delete(id: number): Promise<Product> {
     try {
       const sql = "DELETE FROM products WHERE id=($1)";
+      // @ts-ignore
       const conn = await Client.connect();
       const { rows } = await conn.query(sql, [id]);
       conn.release();

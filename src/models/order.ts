@@ -1,3 +1,4 @@
+// @ts-ignore
 import Client from "../database";
 
 export interface OrderProduct {
@@ -15,6 +16,7 @@ export interface Order {
 export class OrderMapping {
   async index(): Promise<Order[]> {
     try {
+      // @ts-ignore
       const conn = await Client.connect();
       const { rows } = await conn.query("SELECT * FROM orders");
       const ordersRows = rows;
@@ -39,6 +41,7 @@ export class OrderMapping {
   async create(order: Order): Promise<Order> {
     const { order_products, status, user_id } = order;
     try {
+      // @ts-ignore
       const conn = await Client.connect();
       const { rows } = await conn.query(
         "INSERT INTO orders (user_id, status) VALUES($1, $2) RETURNING *",
@@ -66,6 +69,7 @@ export class OrderMapping {
 
   async showByUserId(user_id: number): Promise<Order[]> {
     try {
+      // @ts-ignore
       const conn = await Client.connect();
       const orderResult = await conn.query(
         "SELECT * FROM orders WHERE user_id=($1)",
@@ -93,6 +97,7 @@ export class OrderMapping {
   async edit(order: Order): Promise<Order> {
     const { id, user_id, status } = order;
     try {
+      // @ts-ignore
       const conn = await Client.connect();
       const orderResult = await conn.query(
         "UPDATE orders SET status = $1 WHERE id = $2 RETURNING *",
@@ -115,6 +120,7 @@ export class OrderMapping {
 
   async delete(id: number): Promise<Order> {
     try {
+      // @ts-ignore
       const conn = await Client.connect();
       await conn.query("DELETE FROM order_products WHERE order_id=($1)", [id]);
       const { rows } = await conn.query("DELETE FROM orders WHERE id=($1)", [

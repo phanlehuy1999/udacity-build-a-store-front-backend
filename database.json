@@ -9,8 +9,8 @@
   "test": {
     "driver": "pg",
     "host": "127.0.0.1",
-    "database": "storefront",
-    "user": "test_user",
+    "database": "storefront-test",
+    "user": "magical_user",
     "password": "password123"
   }
 }
