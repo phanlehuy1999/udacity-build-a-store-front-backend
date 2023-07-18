@@ -16,6 +16,7 @@ Bellow are the environmental variables that needs to be set in a `.env` file. Th
 ```
 POSTGRES_HOST=127.0.0.1
 POSTGRES_DB=storefront
+POSTGRES_TEST_DB=storefront-test
 POSTGRES_USER=magical_user
 POSTGRES_PASSWORD=password123
 ENV=dev
@@ -48,5 +49,7 @@ Run test with
 `npm run test`
 
 It sets the environment to `test`, migrates up tables for the test database, run the test then migrate down all the tables for the test database.
+
 # udacity-build-a-store-front-backend
+
 # udacity-build-a-store-front-backend
