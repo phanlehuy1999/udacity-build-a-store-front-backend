@@ -52,7 +52,7 @@ export class UserMapping {
     }
   }
 
-  async read(id: number): Promise<User> {
+  async show(id: number): Promise<User> {
     try {
       const sql = "SELECT * FROM users WHERE id=($1)";
       // @ts-ignore

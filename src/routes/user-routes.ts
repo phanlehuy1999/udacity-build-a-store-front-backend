@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUserAuthenToken } from "../utils/index";
+import { createUserAuthenToken } from "../utils";
 import { User, UserMapping } from "../models/user";
 
 const userMapping = new UserMapping();
@@ -21,6 +21,8 @@ export const createUser = async (req: Request, res: Response) => {
       firstname: req.body.firstname as unknown as string,
       lastname: req.body.lastname as unknown as string,
     };
+
+    console.log(newUser)
 
     if (
       !newUser.username ||
@@ -45,7 +47,7 @@ export const getUserDetail = async (req: Request, res: Response) => {
     if (!id) {
       return res.status(400).send("Missing param id.");
     }
-    const user: User = await userMapping.read(id);
+    const user: User = await userMapping.show(id);
     res.json(user);
   } catch (err) {
     res.status(400).json(err);

@@ -2,6 +2,9 @@
 
 The database schema and and API route information can be found in the (REQUIREMENT.md)
 
+## Ports
+The application runs on port ```3000``` with database on ```5432```.
+
 ## Set up Database
 
 `docker-compose up` to start the docker container
@@ -47,9 +50,3 @@ Authorization   Bearer <token>
 Run test with
 
 `npm run test`
-
-It sets the environment to `test`, migrates up tables for the test database, run the test then migrate down all the tables for the test database.
-
-# udacity-build-a-store-front-backend
-
-# udacity-build-a-store-front-backend

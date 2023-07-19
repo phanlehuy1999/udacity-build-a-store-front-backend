@@ -6,9 +6,12 @@
   "scripts": {
     "start": "node src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "test": "set ENV=test && npx tsc && db-migrate --env test up && jasmine-ts && db-migrate --env test reset",
-    "db-migrate-up": "db-migrate up",
-    "db-migrate-down": "db-migrate reset"
+    "test": "db-migrate --env dev reset && npx tsc && db-migrate --env dev up && jasmine-ts && db-migrate --env dev reset",
+    "dev-migrate-up": "db-migrate --env dev up",
+    "dev-migrate-down": "db-migrate --env dev reset",
+    "test-migrate-up": "db-migrate --env test up",
+    "test-migrate-down": "db-migrate --env test reset",
+    "create-test-db": "db-migrate --config database_create.json db:create storefront_test"
   },
   "author": "Udacity",
   "license": "ISC",
