@@ -22,8 +22,6 @@ export const createUser = async (req: Request, res: Response) => {
       lastname: req.body.lastname as unknown as string,
     };
 
-    console.log(newUser)
-
     if (
       !newUser.username ||
       !newUser.password ||

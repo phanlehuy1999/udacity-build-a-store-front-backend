@@ -2,24 +2,24 @@
 
 The database schema and and API route information can be found in the (REQUIREMENT.md)
 
-## Ports
-The application runs on port ```3000``` with database on ```5432```.
+## Set up
 
-## Set up Database
+Need to set up the necessary things first:
 
-`docker-compose up` to start the docker container
-`npm install` to install all dependencies
-`npm db-migrate-up` to set up the database and get access via http://127.0.0.1:5432
-`npm run watch` to build and run the app
+To install all dependencies:
+`npm install`
 
-## Environmental Variables Set up
+To start the docker container:
+`docker-compose up`
 
-Bellow are the environmental variables that needs to be set in a `.env` file. This is the default setting that I used for development, but you can change it to what works for you.
+## Environmental Variables
+
+To satisfy Udacity requirements, the following environment variable are needed.
 
 ```
 POSTGRES_HOST=127.0.0.1
 POSTGRES_DB=storefront
-POSTGRES_TEST_DB=storefront-test
+POSTGRES_DB_TEST=storefront_test
 POSTGRES_USER=magical_user
 POSTGRES_PASSWORD=password123
 ENV=dev
@@ -29,9 +29,34 @@ TOKEN_SECRET=random-secret-token-phan-le-huy
 
 ```
 
-## Start App
+## Dev Mode
 
-`npm run watch`
+To run the app in dev mode, run the following:
+
+`npm run start`
+
+The application will run on port ```3000``` with database on ```5432```.
+
+If an error "database storefront already exists", run the following:
+
+`npm run drop-dev-db`
+
+
+## Ports
+
+The application runs on port ```3000``` with database on ```5432```.
+
+## Test Mode
+
+To run the app in test mode, run the following:
+
+`npm run test`
+
+The application will run on port ```3001``` with database on ```5432```.
+
+If an error "database storefront_test already exists", run the following:
+
+`npm run drop-test-db`
 
 ## Endpoint Access
 
@@ -44,9 +69,3 @@ Tokens are passed along with the http header as
 ```
 Authorization   Bearer <token>
 ```
-
-## Testing
-
-Run test with
-
-`npm run test`

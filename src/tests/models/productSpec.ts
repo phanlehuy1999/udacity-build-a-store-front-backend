@@ -29,7 +29,7 @@ describe("Product Model", () => {
             price: 15
         });
         expect(result).toEqual({
-            id: 1,
+            id: 2,
             name: "Product",
             price: 15
         });
@@ -38,25 +38,37 @@ describe("Product Model", () => {
     it('index method should return a list of product', async () => {
         const result = await productMapping.index();
         expect(result).toEqual([{
-            id: 1,
+            id: 2,
             name: "Product",
             price: 15
         }]);
     });
 
     it('show method should return the correct product', async () => {
-        const result = await productMapping.show(1);
+        const result = await productMapping.show(2);
         expect(result).toEqual({
-            id: 1,
+            id: 2,
             name: "Product",
             price: 15
         });
     });
 
-    // it('delete method should remove the product', async () => {
-    //     await productMapping.delete(1);
-    //     const result = await productMapping.index()
-    //
-    //     expect(result).toEqual([]);
-    // });
+    it('edit method should update the correct product', async () => {
+        const result = await productMapping.edit({
+            id: 2,
+            name: 'ProductUpdated',
+            price: 16
+        });
+        expect(result).toEqual({
+            id: 2,
+            name: "ProductUpdated",
+            price: 16
+        });
+    });
+
+    it('delete method should remove the product', async () => {
+        await productMapping.delete(2);
+        const result = await productMapping.index()
+        expect(result).toEqual([]);
+    });
 });

@@ -53,7 +53,6 @@ export const updateProduct = async (req: Request, res: Response) => {
       name: req.body.name as unknown as string,
       price: req.body.price as unknown as number,
     };
-    console.log(updateProduct);
     if (!updateProduct.id || !updateProduct.name || !updateProduct.price) {
       res.status(400);
       res.send("Missing param id or name or price!");

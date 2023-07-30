@@ -8,6 +8,7 @@ export interface User {
   firstname?: string;
   lastname?: string;
   password?: string;
+  password_digest?: string;
 }
 
 export class UserMapping {
@@ -33,7 +34,6 @@ export class UserMapping {
         password + ((process.env.BCRYPT_PASSWORD as string) || ""),
         parseInt(process.env.SALT_ROUNDS as string)
       );
-      console.log(hashPassword);
       // @ts-ignore
       const conn = await Client.connect();
       const { rows } = await conn.query(sql, [
@@ -42,7 +42,6 @@ export class UserMapping {
         lastname,
         hashPassword,
       ]);
-      console.log(rows);
       conn.release();
       return rows[0];
     } catch (err) {

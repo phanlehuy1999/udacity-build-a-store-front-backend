@@ -1,5 +1,5 @@
 import { Application } from "express";
-import { verifyAuthToken } from "../utils/index";
+import { verifyAuthToken } from "../utils";
 
 import {
   getAllUser,
